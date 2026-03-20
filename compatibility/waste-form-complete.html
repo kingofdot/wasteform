@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>폐기물처리업 적합성확인 신청서</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f5f3ef;
+      --card-bg: #ffffff;
+      --primary: #1a3a5c;
+      --primary-light: #2a5a8c;
+      --accent: #c75b2a;
+      --accent-light: #e8734a;
+      --text: #1e1e1e;
+      --text-muted: #6b7280;
+      --border: #d1cdc6;
+      --border-light: #e8e4dd;
+      --input-bg: #fafaf8;
+      --input-focus: #eef3f9;
+      --row-hover: #f9f7f4;
+      --danger: #b91c1c;
+      --success: #166534;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.1);
+      --radius: 8px;
+      --radius-lg: 14px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'IBM Plex Sans KR', 'Noto Sans KR', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .page-header {
+      background: linear-gradient(135deg, var(--primary) 0%, #0f2840 100%);
+      color: white;
+      padding: 48px 0 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(199, 91, 42, 0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .page-header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light), var(--accent));
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .header-inner h1 {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 900;
+      font-size: 28px;
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+
+    .header-inner p {
+      font-weight: 300;
+      font-size: 14px;
+      opacity: 0.7;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 16px;
+    }
+
+    .sector {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      margin-bottom: 28px;
+      overflow: hidden;
+      border: 1px solid var(--border-light);
+      animation: fadeUp 0.5s ease both;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .sector-header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: white;
+      padding: 16px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sector-num {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      min-width: 32px;
+      height: 32px;
+      padding: 0 8px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .sector-header h2 {
+      font-weight: 600;
+      font-size: 16px;
+      letter-spacing: -0.3px;
+    }
+
+    .sector-header .badge {
+      margin-left: auto;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 400;
+    }
+
+    .sector-body {
+      padding: 28px 14px;
+    }
+
+    .form-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .form-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .form-row label {
+      width: 180px;
+      flex-shrink: 0;
+      font-weight: 500;
+      font-size: 13.5px;
+      color: var(--text);
+      text-align: right;
+      padding-right: 4px;
+      position: relative;
+    }
+
+    .form-row label::after {
+      content: '';
+      position: absolute;
+      right: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .form-row input[type="text"],
+    .form-row input[type="date"],
+    .form-row select {
+      flex: 1;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 13.5px;
+      font-family: inherit;
+      background: var(--input-bg);
+      color: var(--text);
+      transition: all 0.2s;
+      outline: none;
+    }
+
+    .form-row input[type="file"] {
+      flex: 1;
+      padding: 7px 10px;
+      font-size: 13.5px;
+      font-family: inherit;
+      color: var(--text);
+      outline: none;
+    }
+
+    .form-row input:focus,
+    .form-row select:focus {
+      border-color: var(--primary-light);
+      background: var(--input-focus);
+      box-shadow: 0 0 0 3px rgba(42, 90, 140, 0.1);
+    }
+
+    .form-row select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 32px;
+    }
+
+    .excel-wrap {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .excel-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .excel-table thead th {
+      background: linear-gradient(180deg, #f0ede8 0%, #e6e2db 100%);
+      padding: 10px 12px;
+      font-weight: 600;
+      font-size: 12.5px;
+      color: var(--primary);
+      border-bottom: 2px solid var(--border);
+      border-right: 1px solid var(--border-light);
+      text-align: center;
+      white-space: nowrap;
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+
+    .excel-table thead th:last-child {
+      border-right: none;
+    }
+
+    .excel-table tbody td {
+      padding: 0;
+      border-bottom: 1px solid var(--border-light);
+      border-right: 1px solid var(--border-light);
+      vertical-align: middle;
+    }
+
+    .excel-table tbody td:last-child {
+      border-right: none;
+    }
+
+    .excel-table tbody tr:hover {
+      background: var(--row-hover);
+    }
+
+    .excel-table tbody td input,
+    .excel-table tbody td select,
+    .excel-table tbody td textarea {
+      width: 100%;
+      padding: 9px 10px;
+      border: none;
+      background: transparent;
+      font-size: 13px;
+      font-family: inherit;
+      color: var(--text);
+      outline: none;
+    }
+
+    .excel-table tbody td input:focus,
+    .excel-table tbody td textarea:focus {
+      background: var(--input-focus);
+      box-shadow: inset 0 0 0 2px rgba(42, 90, 140, 0.2);
+    }
+
+    .excel-table .row-num {
+      width: 40px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 11px;
+      background: #f9f7f4;
+      font-weight: 500;
+      padding: 9px 0;
+    }
+
+    .excel-table .del-cell {
+      width: 36px;
+      text-align: center;
+      padding: 0;
+    }
+
+    .del-btn {
+      background: none;
+      border: none;
+      color: #ccc;
+      cursor: pointer;
+      font-size: 16px;
+      padding: 6px;
+      border-radius: 4px;
+      transition: all 0.15s;
+      line-height: 1;
+    }
+
+    .del-btn:hover {
+      color: var(--danger);
+      background: #fef2f2;
+    }
+
+    .add-row-bar {
+      display: flex;
+      justify-content: flex-end;
+      padding: 8px 12px;
+      background: #fcfbf9;
+    }
+
+    .add-row-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 20px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 12.5px;
+      font-family: inherit;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .add-row-btn:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .add-row-btn svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .excel-top-bar {
+      display: flex;
+      justify-content: flex-end;
+      padding: 8px 12px;
+      background: #fcfbf9;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .img-modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    .img-modal-overlay.active {
+      display: flex;
+    }
+
+    .img-modal-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .img-modal-content img {
+      display: block;
+      max-width: 90vw;
+      max-height: 75vh;
+      object-fit: contain;
+    }
+
+    .img-modal-actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      padding: 16px 24px;
+      background: #f8f8f8;
+      border-top: 1px solid #e5e5e5;
+    }
+
+    .img-modal-confirm-btn,
+    .img-modal-delete-btn {
+      padding: 10px 36px;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .img-modal-confirm-btn {
+      background: var(--primary);
+    }
+
+    .img-modal-confirm-btn:hover {
+      background: var(--primary-light);
+    }
+
+    .img-modal-delete-btn {
+      background: var(--danger);
+    }
+
+    .img-modal-delete-btn:hover {
+      background: #991b1b;
+    }
+
+    .photo-upload {
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s;
+      background: var(--input-bg);
+      position: relative;
+    }
+
+    .photo-upload:hover,
+    .photo-upload.dragover {
+      border-color: var(--primary-light);
+      background: var(--input-focus);
+    }
+
+    .photo-upload.has-image {
+      padding: 12px;
+      border-style: solid;
+    }
+
+    .photo-upload svg {
+      width: 40px;
+      height: 40px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .photo-upload p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .photo-upload p span {
+      color: var(--primary-light);
+      font-weight: 500;
+      text-decoration: underline;
+    }
+
+    .photo-upload img {
+      max-width: 100%;
+      max-height: 400px;
+      border-radius: 6px;
+      object-fit: contain;
+    }
+
+    .photo-upload input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .photo-upload .remove-img {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mini-photo {
+      width: 100%;
+      min-height: 50px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .mini-photo input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .mini-photo img {
+      max-width: 80px;
+      max-height: 60px;
+      border-radius: 4px;
+      object-fit: cover;
+    }
+
+    .mini-photo .placeholder {
+      font-size: 11px;
+      color: #bbb;
+      text-align: center;
+      padding: 4px;
+    }
+
+    .mini-photo-sm {
+      min-height: 40px;
+    }
+
+    .mini-photo-sm img {
+      max-width: 60px;
+      max-height: 45px;
+    }
+
+    .sector.hidden {
+      display: none;
+    }
+
+    .notice {
+      background: linear-gradient(135deg, #fef9f0, #fdf6ea);
+      border: 1px solid #f0dbb8;
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      font-size: 12.5px;
+      color: #92650a;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .notice svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .sub-label-tag {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 2px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    .sub-section {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px dashed var(--border-light);
+    }
+
+    .sub-section-title {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sub-section-title::before {
+      content: '';
+      width: 4px;
+      height: 16px;
+      background: var(--accent);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .calc-result {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 6px;
+      padding: 3px 10px;
+      font-weight: 600;
+      font-size: 12.5px;
+      color: var(--success);
+      display: inline-block;
+    }
+
+    .file-attach-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+      padding: 10px 14px;
+      background: var(--input-bg);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius);
+    }
+
+    .file-attach-row label.file-label {
+      width: auto;
+      flex-shrink: 0;
+      font-weight: 500;
+      font-size: 13px;
+      color: var(--text);
+      text-align: left;
+      padding-right: 0;
+      position: relative;
+      min-width: 160px;
+    }
+
+    .file-attach-row label.file-label::after {
+      display: none;
+    }
+
+    .file-attach-row input[type="file"] {
+      flex: 1;
+      font-size: 13px;
+    }
+
+    .file-attach-row .file-status {
+      font-size: 11px;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .photo-upload-sm {
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s;
+      background: var(--input-bg);
+      position: relative;
+      margin-top: 12px;
+    }
+
+    .photo-upload-sm:hover {
+      border-color: var(--primary-light);
+      background: var(--input-focus);
+    }
+
+    .photo-upload-sm.has-image {
+      padding: 8px;
+      border-style: solid;
+    }
+
+    .photo-upload-sm svg {
+      width: 28px;
+      height: 28px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .photo-upload-sm p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .photo-upload-sm p span {
+      color: var(--primary-light);
+      font-weight: 500;
+      text-decoration: underline;
+    }
+
+    .photo-upload-sm img {
+      max-width: 100%;
+      max-height: 250px;
+      border-radius: 6px;
+      object-fit: contain;
+    }
+
+    .photo-upload-sm input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .photo-upload-sm .remove-img {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 16px 8px;
+      }
+
+      .form-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+      }
+
+      .form-row label {
+        width: auto;
+        text-align: left;
+      }
+
+      .form-row label::after {
+        display: none;
+      }
+
+      .sector-body {
+        padding: 16px 8px;
+      }
+
+      .excel-wrap {
+        overflow-x: auto;
+      }
+
+      .excel-table {
+        min-width: 600px;
+      }
+
+      .file-attach-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .file-attach-row label.file-label {
+        min-width: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page-header">
+    <div class="header-inner">
+      <h1>폐기물처리업 적합성확인 신청서</h1>
+      <p>폐기물관리법 시행규칙 [별지 제21호의6서식]에 따른 적합성확인 신청 양식</p>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- ━━━ 섹터 1: 사업자 정보 ━━━ -->
+    <div class="sector" id="sector1">
+      <div class="sector-header">
+        <div class="sector-num">1</div>
+        <h2>사업자 정보</h2>
+        <span class="badge">공통</span>
+      </div>
+      <div class="sector-body">
+        <div class="form-row">
+          <label>상호(명칭)</label>
+          <input type="text" placeholder="상호명을 입력하세요">
+        </div>
+        <div class="form-row">
+          <label>사업자등록번호</label>
+          <input type="text" placeholder="000-00-00000" id="bizNum">
+        </div>
+        <div class="form-row">
+          <label>성명(대표자)</label>
+          <input type="text" placeholder="대표자 성명">
+        </div>
+        <div class="form-row">
+          <label>주민등록번호</label>
+          <input type="text" placeholder="000000-0000000">
+        </div>
+        <div class="form-row">
+          <label>주소</label>
+          <input type="text" placeholder="사업장 주소 (전화번호 포함)">
+        </div>
+        <div class="form-row">
+          <label>업종</label>
+          <select id="bizType" onchange="onBizTypeChange()">
+            <option value="">-- 업종 선택 --</option>
+            <option value="수집운반">폐기물 수집운반업</option>
+            <option value="중간처분">폐기물 중간처분업</option>
+            <option value="최종처분">폐기물 최종처분업</option>
+            <option value="종합처분">폐기물 종합처분업</option>
+            <option value="중간재활용">폐기물 중간재활용업</option>
+            <option value="최종재활용">폐기물 최종재활용업</option>
+            <option value="종합재활용">폐기물 종합재활용업</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>영업대상폐기물</label>
+          <input type="text" placeholder="영업대상 폐기물 종류">
+        </div>
+        <div class="form-row">
+          <label>허가번호</label>
+          <input type="text" placeholder="허가번호">
+        </div>
+        <div class="form-row">
+          <label>허가일</label>
+          <input type="date">
+        </div>
+        <div class="form-row">
+          <label>적합성확인 유효기간</label>
+          <input type="text" placeholder="YYYY.MM.DD ~ YYYY.MM.DD">
+        </div>
+        <div class="form-row">
+          <label>제출청</label>
+          <input type="text" placeholder="시·도지사, 유역(지방)환경청장">
+        </div>
+      </div>
+    </div>
+
+    <!-- ━━━ 섹터 2: 시설 및 장비 명세서 (처리시설) ━━━ -->
+    <div class="sector" id="sector2">
+      <div class="sector-header">
+        <div class="sector-num">2</div>
+        <h2>시설 및 장비 명세서</h2>
+        <span class="badge">공통</span>
+      </div>
+      <div class="sector-body">
+
+        <!-- 2-A: 처리시설 (처분/재활용업만) -->
+        <div id="sector2_facility">
+          <div class="sub-section-title">처리시설</div>
+          <div class="excel-wrap">
+            <div class="excel-top-bar">
+              <button class="add-row-btn" onclick="addRow2()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="12" y1="5" x2="12" y2="19" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+                행 추가
+              </button>
+            </div>
+            <table class="excel-table" id="table2">
+              <thead>
+                <tr>
+                  <th style="width:40px">No</th>
+                  <th>시설·장비명</th>
+                  <th>규격(용량)</th>
+                  <th>수량</th>
+                  <th>시간당처리량</th>
+                  <th>일일조업시간</th>
+                  <th>일일처리량</th>
+                  <th style="width:36px"></th>
+                </tr>
+              </thead>
+              <tbody id="tbody2">
+                <tr>
+                  <td class="row-num">1</td>
+                  <td><input type="text" data-col="name" placeholder="시설·장비명"></td>
+                  <td><input type="text" data-col="spec" placeholder="규격(용량)"></td>
+                  <td><input type="text" data-col="qty" placeholder="수량"></td>
+                  <td><input type="text" data-col="hourly" placeholder="톤/시간" oninput="calcDaily(this)"></td>
+                  <td><input type="text" data-col="hours" placeholder="시간" oninput="calcDaily(this)"></td>
+                  <td><input type="text" data-col="daily" placeholder="톤/일"></td>
+                  <td class="del-cell"><button class="del-btn" onclick="delRow(this,'tbody2')" title="삭제">×</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 2-B: 기타시설 -->
+        <div class="sub-section" id="sector2_etc">
+          <div class="sub-section-title">기타시설</div>
+          <div class="notice">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
+            <div>실험실(실험기기 포함), 계량시설, 주차장, 소독시설, 불도저, 굴착기, 세차시설 등 별표7 기준의 시설을 기재합니다.</div>
+          </div>
+          <div class="excel-wrap">
+            <div class="excel-top-bar">
+              <button class="add-row-btn" onclick="addRowEtc()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="12" y1="5" x2="12" y2="19" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+                행 추가
+              </button>
+            </div>
+            <table class="excel-table">
+              <thead>
+                <tr>
+                  <th style="width:40px">No</th>
+                  <th>시설종류</th>
+                  <th>규격/처리능력</th>
+                  <th>수량</th>
+                  <th style="width:36px"></th>
+                </tr>
+              </thead>
+              <tbody id="tbodyEtc">
+                <tr>
+                  <td class="row-num">1</td>
+                  <td><input type="text" placeholder="예: 계량시설"></td>
+                  <td><input type="text" placeholder="예: 30톤"></td>
+                  <td><input type="text" placeholder="1식"></td>
+                  <td class="del-cell"><button class="del-btn" onclick="delRow(this,'tbodyEtc')" title="삭제">×</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 2-C: 보관시설(허용보관량) + 현장사진 -->
+        <div class="sub-section">
+          <div class="sub-section-title" id="storageTitle">보관시설 (허용보관량)</div>
+          <div class="notice">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
+            <div>폐기물 종류별로 가로(m)×세로(m)×높이(m) = 용량(㎥), 용량(㎥)×비중(톤/㎥) = 허용보관량(톤)을 산출합니다. 허가증 기재값과 소수점 차이가 있을 수 있으므로 용량과
+              허용보관량은 직접 수정 가능합니다. 최근 1개월 이내 촬영한 외부전경·내부 사진을 함께 첨부합니다.</div>
+          </div>
+          <div class="excel-wrap">
+            <div class="excel-top-bar">
+              <button class="add-row-btn" onclick="addRowStorage()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="12" y1="5" x2="12" y2="19" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+                행 추가
+              </button>
+            </div>
+            <table class="excel-table">
+              <thead>
+                <tr>
+                  <th style="width:40px">No</th>
+                  <th>보관 폐기물 종류</th>
+                  <th>가로(m)</th>
+                  <th>세로(m)</th>
+                  <th>높이(m)</th>
+                  <th>용량(㎥)</th>
+                  <th>비중(톤/㎥)</th>
+                  <th>허용보관량(톤)</th>
+                  <th style="width:90px" id="storagePhotoHead1">외부사진</th>
+                  <th style="width:90px" id="storagePhotoHead2">내부사진</th>
+                  <th style="width:36px"></th>
+                </tr>
+              </thead>
+              <tbody id="tbodyStorage">
+                <tr>
+                  <td class="row-num">1</td>
+                  <td><input type="text" placeholder="폐기물 종류"></td>
+                  <td><input type="text" data-sc="w" placeholder="m" oninput="calcStorage(this)"></td>
+                  <td><input type="text" data-sc="d" placeholder="m" oninput="calcStorage(this)"></td>
+                  <td><input type="text" data-sc="h" placeholder="m" oninput="calcStorage(this)"></td>
+                  <td><input type="text" data-sc="vol" placeholder="㎥" oninput="calcStorageFromVol(this)"></td>
+                  <td><input type="text" data-sc="g" placeholder="톤/㎥" oninput="calcStorage(this)"></td>
+                  <td><input type="text" data-sc="result" placeholder="톤"></td>
+                  <td>
+                    <div class="mini-photo mini-photo-sm">
+                      <span class="placeholder">외부전경</span>
+                      <input type="file" accept=".jpg,.jpeg,.png" onchange="miniPhotoSelect(event, this)">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="mini-photo mini-photo-sm">
+                      <span class="placeholder">내부사진</span>
+                      <input type="file" accept=".jpg,.jpeg,.png" onchange="miniPhotoSelect(event, this)">
+                    </div>
+                  </td>
+                  <td class="del-cell"><button class="del-btn" onclick="delRow(this,'tbodyStorage')"
+                      title="삭제">×</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ━━━ 섹터 2-1: 수집·운반 차량 ━━━ -->
+    <div class="sector" id="sector2_1">
+      <div class="sector-header">
+        <div class="sector-num">3</div>
+        <h2>수집·운반 차량 정보</h2>
+        <span class="badge">공통</span>
+      </div>
+      <div class="sector-body">
+        <div class="notice">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+          <div>차종, 차량번호(등록번호), 용량(톤)을 기재합니다. 전용차량의 경우 자동차등록증 사본과 앞뒤양옆 사진을 첨부합니다.</div>
+        </div>
+        <div class="excel-wrap">
+          <div class="excel-top-bar">
+            <button class="add-row-btn" onclick="addRow2_1()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+              행 추가
+            </button>
+          </div>
+          <table class="excel-table" id="table2_1">
+            <thead>
+              <tr>
+                <th style="width:40px">No</th>
+                <th style="width:33.3%">차종</th>
+                <th style="width:33.3%">차량번호</th>
+                <th style="width:33.3%">용량(톤)</th>
+                <th style="width:100px">자동차등록증</th>
+                <th style="width:100px">차량사진</th>
+                <th style="width:36px"></th>
+              </tr>
+            </thead>
+            <tbody id="tbody2_1">
+              <tr>
+                <td class="row-num">1</td>
+                <td><input type="text" placeholder="예: 포터, 탱크로리"></td>
+                <td><input type="text" placeholder="차량번호"></td>
+                <td><input type="text" placeholder="톤"></td>
+                <td>
+                  <div class="mini-photo mini-photo-sm">
+                    <span class="placeholder">등록증</span>
+                    <input type="file" accept=".jpg,.jpeg,.png,.pdf" onchange="miniPhotoSelect(event, this)">
+                  </div>
+                </td>
+                <td>
+                  <div class="mini-photo mini-photo-sm">
+                    <span class="placeholder">사진</span>
+                    <input type="file" accept=".jpg,.jpeg,.png" onchange="miniPhotoSelect(event, this)">
+                  </div>
+                </td>
+                <td class="del-cell"><button class="del-btn" onclick="delRow(this,'tbody2_1')" title="삭제">×</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ━━━ 섹터 3: 기술능력 보유현황 ━━━ -->
+    <div class="sector" id="sector3">
+      <div class="sector-header">
+        <div class="sector-num">4</div>
+        <h2>기술능력 보유현황</h2>
+        <span class="badge">공통</span>
+      </div>
+      <div class="sector-body">
+        <div class="notice">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+          <div>기술인력의 성명, 주소, 자격증 현황을 기재하고, 자격증 사본(또는 대체인력의 경우 경력증명서)과 의료보험 납부확인서를 첨부하여 실제 근무여부를 증빙합니다.</div>
+        </div>
+        <div class="form-row">
+          <label>성명</label>
+          <input type="text" placeholder="기술인력 성명">
+        </div>
+        <div class="form-row">
+          <label>주소</label>
+          <input type="text" placeholder="기술인력 주소">
+        </div>
+        <div class="form-row">
+          <label>자격증 현황</label>
+          <input type="text" placeholder="예: 폐기물처리기사, 폐기물처리산업기사">
+        </div>
+
+        <div class="sub-section">
+          <div class="sub-section-title">증빙서류 첨부</div>
+          <div class="file-attach-row">
+            <label class="file-label">자격증 사본</label>
+            <input type="file" accept=".pdf,.jpg,.jpeg,.png">
+            <span class="file-status">필수</span>
+          </div>
+          <div class="file-attach-row">
+            <label class="file-label">경력증명서 (대체인력)</label>
+            <input type="file" accept=".pdf,.jpg,.jpeg,.png">
+            <span class="file-status">해당 시</span>
+          </div>
+          <div class="file-attach-row">
+            <label class="file-label">의료보험 납부확인서</label>
+            <input type="file" accept=".pdf,.jpg,.jpeg,.png">
+            <span class="file-status">필수</span>
+          </div>
+          <div class="file-attach-row">
+            <label class="file-label">폐기물처리담당자 교육수료증</label>
+            <input type="file" accept=".pdf,.jpg,.jpeg,.png">
+            <span class="file-status">해당 시</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ━━━ 섹터 4: 시설 설치명세서 및 도면 (처분/재활용) ━━━ -->
+    <div class="sector hidden" id="sector4">
+      <div class="sector-header">
+        <div class="sector-num">5</div>
+        <h2 id="sector4Title">시설 설치명세서 및 도면</h2>
+        <span class="badge" id="sector4Badge">처분업/재활용업</span>
+      </div>
+      <div class="sector-body">
+        <div class="notice">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+          <div>각 시설별 시설명, 시설규모(방지시설 포함), 동력, 수량을 기재합니다. 섹터 2 처리시설에 입력한 정보가 자동 반영됩니다. 도면은 시설의 외형·크기·구조를 확인할 수 있는 일반도면
+            수준이면 됩니다(수기 작성 가능).</div>
+        </div>
+
+        <!-- 설치명세서 테이블 -->
+        <span class="sub-label-tag" id="sector4Tag">처분시설 / 재활용시설</span>
+        <div class="excel-wrap">
+          <table class="excel-table" id="table4">
+            <thead>
+              <tr>
+                <th style="width:40px">No</th>
+                <th>시설장비명</th>
+                <th>규격(용량)</th>
+                <th>수량</th>
+                <th>사이즈</th>
+                <th><input type="text" placeholder="항목입력"
+                    style="border:none;background:transparent;text-align:center;font-weight:600;font-size:12.5px;color:var(--primary);width:100%;padding:0;">
+                </th>
+                <th><input type="text" placeholder="항목입력"
+                    style="border:none;background:transparent;text-align:center;font-weight:600;font-size:12.5px;color:var(--primary);width:100%;padding:0;">
+                </th>
+                <th><input type="text" placeholder="항목입력"
+                    style="border:none;background:transparent;text-align:center;font-weight:600;font-size:12.5px;color:var(--primary);width:100%;padding:0;">
+                </th>
+                <th><input type="text" placeholder="항목입력"
+                    style="border:none;background:transparent;text-align:center;font-weight:600;font-size:12.5px;color:var(--primary);width:100%;padding:0;">
+                </th>
+                <th style="width:80px">도면</th>
+                <th style="width:36px"></th>
+              </tr>
+            </thead>
+            <tbody id="tbody4">
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 배치도 첨부 -->
+        <div class="sub-section">
+          <div class="sub-section-title">부지 내 시설 배치도</div>
+          <div class="photo-upload" id="layoutPhoto" ondragover="dragOver(event, this)" ondragleave="dragLeave(this)"
+            ondrop="dropFile(event, this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <circle cx="8.5" cy="8.5" r="1.5" />
+              <polyline points="21 15 16 10 5 21" />
+            </svg>
+            <p>부지 내 시설 배치도 이미지를 드래그하거나 <span>파일 선택</span> (jpg, png, 수기작성 스캔 가능)</p>
+            <input type="file" accept=".jpg,.jpeg,.png" onchange="handleFileSelect(event, 'layoutPhoto')">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ━━━ 섹터 5: 공정도 (처분/재활용) ━━━ -->
+    <div class="sector hidden" id="sector5">
+      <div class="sector-header">
+        <div class="sector-num">6</div>
+        <h2 id="sector5Title">공정도</h2>
+        <span class="badge" id="sector5Badge">처분업/재활용업</span>
+      </div>
+      <div class="sector-body">
+        <div class="notice">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+          <div id="sector5Notice">폐기물 입고부터 처리 후 출하까지의 실 공정을 작성합니다. 허가증 상 공정도와 일치하는 경우 제출을 생략할 수 있습니다. 음식물류 폐기물 재활용 시
+            물질수지도를 포함해야 합니다.</div>
+        </div>
+        <p style="font-size:13px; color:var(--text-muted); margin-bottom:16px;" id="sector5Desc">
+          처분(재활용)대상 폐기물의 공정도를 첨부해 주세요.
+        </p>
+        <div class="photo-upload" id="processPhoto" ondragover="dragOver(event, this)" ondragleave="dragLeave(this)"
+          ondrop="dropFile(event, this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+            <circle cx="8.5" cy="8.5" r="1.5" />
+            <polyline points="21 15 16 10 5 21" />
+          </svg>
+          <p>공정도 이미지를 드래그하여 놓거나 <span>파일 선택</span> (jpg, png)</p>
+          <input type="file" accept=".jpg,.jpeg,.png" onchange="handleFileSelect(event, 'processPhoto')">
+        </div>
+
+        <!-- 물질수지도 (재활용업 음식물류) -->
+        <div class="sub-section hidden" id="massBalanceSection">
+          <div class="sub-section-title">물질수지도 (음식물류 폐기물 재활용 시)</div>
+          <div class="photo-upload" id="massBalancePhoto" ondragover="dragOver(event, this)"
+            ondragleave="dragLeave(this)" ondrop="dropFile(event, this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <circle cx="8.5" cy="8.5" r="1.5" />
+              <polyline points="21 15 16 10 5 21" />
+            </svg>
+            <p>물질수지도 이미지를 드래그하여 놓거나 <span>파일 선택</span> (jpg, png)</p>
+            <input type="file" accept=".jpg,.jpeg,.png" onchange="handleFileSelect(event, 'massBalancePhoto')">
+          </div>
+        </div>
+
+        <div style="margin-top: 16px; display: flex; justify-content: flex-end;">
+          <button type="button" class="add-row-btn" id="btnProcessFlow" onclick="togglePanel('panelProcessFlow', 'btnProcessFlow')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 20h9" />
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+            </svg>
+            공정도 만들기
+            <svg id="arrowProcessFlow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px;margin-left:4px;transition:transform 0.3s">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+        </div>
+        <!-- 아코디언 패널: 공정도 빌더 -->
+        <div id="panelProcessFlow" style="
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease, margin-top 0.35s ease;
+          opacity: 0;
+          margin-top: 0;
+          border-radius: 10px;
+        ">
+          <div style="
+            border: 2px solid var(--primary-light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 6px 24px rgba(26,58,92,0.12);
+            margin-top: 14px;
+          ">
+            <div style="
+              background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+              padding: 10px 16px;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+            ">
+              <span style="color:white;font-weight:600;font-size:14px;">🔧 공정도 빌더</span>
+              <button onclick="togglePanel('panelProcessFlow','btnProcessFlow')" style="
+                background:rgba(255,255,255,0.15);
+                border:1px solid rgba(255,255,255,0.3);
+                color:white;
+                padding:3px 12px;
+                border-radius:20px;
+                cursor:pointer;
+                font-size:12px;
+              ">닫기 ✕</button>
+            </div>
+            <iframe
+              id="iframeProcessFlow"
+              src=""
+              data-src="process-flow-builder.html"
+              style="width:100%;height:680px;border:none;display:block;"
+              title="공정도 빌더"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- (보관시설 현장사진은 섹터2 보관시설에 통합됨) -->
+
+    <!-- ━━━ 섹터 7: 연간 폐기물 반입량·처리량 및 가동일수 (처분/재활용) ━━━ -->
+    <div class="sector hidden" id="sector7">
+      <div class="sector-header">
+        <div class="sector-num">8</div>
+        <h2>연간 폐기물 반입량·처리량 및 가동일수</h2>
+        <span class="badge" id="sector7Badge">처분업/재활용업</span>
+      </div>
+      <div class="sector-body">
+        <div class="notice">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+          <div id="sector7Notice">
+            적합성확인 직전년도 기준입니다.<br>
+            ● 연간반입량 및 연간처리량 : 올바로 실적보고의 내용을 적습니다.<br>
+            ● 조업일수 : 올바로시스템 → 대장관리 → 처리자 → 대장에서 출력합니다. 1년치를 다운로드 받아 분석기를 이용해보세요
+          </div>
+        </div>
+        <div class="excel-wrap">
+          <div class="excel-top-bar">
+            <button class="add-row-btn" onclick="addRow7()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+              행 추가
+            </button>
+          </div>
+          <table class="excel-table" id="table7">
+            <thead>
+              <tr>
+                <th style="width:40px">No</th>
+                <th>폐기물 종류</th>
+                <th>연간 반입량(톤)</th>
+                <th>연간 처리량(톤)</th>
+                <th>가동일수(일/년)</th>
+                <th style="width:36px"></th>
+              </tr>
+            </thead>
+            <tbody id="tbody7">
+              <tr>
+                <td class="row-num">1</td>
+                <td><input type="text" placeholder="폐기물 종류"></td>
+                <td><input type="text" placeholder="톤"></td>
+                <td><input type="text" placeholder="톤"></td>
+                <td><input type="text" placeholder="일"></td>
+                <td class="del-cell"><button class="del-btn" onclick="delRow(this,'tbody7')" title="삭제">×</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div
+          style="margin-top: 16px; display: flex; gap: 12px; justify-content: flex-end; align-items: center; flex-wrap: wrap;">
+          <label class="add-row-btn" style="background: var(--accent); cursor: pointer;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="17 8 12 3 7 8" />
+              <line x1="12" y1="3" x2="12" y2="15" />
+            </svg>
+            <span id="prevYearText">실적보고서 첨부(PDF)</span>
+            <input type="file" accept=".pdf" style="display: none;">
+          </label>
+          <button type="button" class="add-row-btn" id="btnExcelMerger" style="background: var(--success);"
+            onclick="togglePanel('panelExcelMerger','btnExcelMerger')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+            </svg>
+            연간 가동일 분석기
+            <svg id="arrowExcelMerger" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px;margin-left:4px;transition:transform 0.3s">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- 아코디언 패널: 가동일 분석기 -->
+        <div id="panelExcelMerger" style="
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease, margin-top 0.35s ease;
+          opacity: 0;
+          margin-top: 0;
+          border-radius: 10px;
+        ">
+          <div style="
+            border: 2px solid var(--success);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 6px 24px rgba(22,101,52,0.12);
+            margin-top: 14px;
+          ">
+            <div style="
+              background: linear-gradient(135deg, #166534 0%, #15803d 100%);
+              padding: 10px 16px;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+            ">
+              <span style="color:white;font-weight:600;font-size:14px;">📊 연간 가동일 분석기</span>
+              <button onclick="togglePanel('panelExcelMerger','btnExcelMerger')" style="
+                background:rgba(255,255,255,0.15);
+                border:1px solid rgba(255,255,255,0.3);
+                color:white;
+                padding:3px 12px;
+                border-radius:20px;
+                cursor:pointer;
+                font-size:12px;
+              ">닫기 ✕</button>
+            </div>
+            <iframe
+              id="iframeExcelMerger"
+              src=""
+              data-src="excel_merger_fixed.html"
+              style="width:100%;height:780px;border:none;display:block;"
+              title="연간 가동일 분석기"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ━━━ 섹터 8: 정기검사 결과서 (처분/재활용, 해당 시) ━━━ -->
+    <div class="sector hidden" id="sector8">
+      <div class="sector-header">
+        <div class="sector-num">9</div>
+        <h2>최근 정기검사 결과서</h2>
+        <span class="badge" id="sector8Badge">처분업/재활용업</span>
+      </div>
+      <div class="sector-body">
+        <div class="notice">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+          <div>폐기물관리법 제30조제2항 또는 자원재활용법 제25조의8에 따른 정기검사 대상인 경우에만 제출합니다 (소각시설, SRF제조시설 등). 해당하지 않는 경우 이 섹터는 비워두시면 됩니다.
+          </div>
+        </div>
+        <div class="form-row">
+          <label>정기검사 대상여부</label>
+          <select id="inspectionTarget">
+            <option value="N">해당없음</option>
+            <option value="Y">해당 (정기검사 대상시설 보유)</option>
+          </select>
+        </div>
+        <div id="inspectionFiles" style="display:none; margin-top: 16px;">
+          <div class="file-attach-row">
+            <label class="file-label">정기검사 결과서</label>
+            <input type="file" accept=".pdf,.jpg,.jpeg,.png">
+            <span class="file-status">필수</span>
+          </div>
+          <div class="file-attach-row">
+            <label class="file-label">항목별 검사결과 (첨부)</label>
+            <input type="file" accept=".pdf,.jpg,.jpeg,.png">
+            <span class="file-status">해당 시</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 이미지 모달 -->
+  <div class="img-modal-overlay" id="imgModal" onclick="closeImgModal(event)">
+    <div class="img-modal-content" onclick="event.stopPropagation()">
+      <img id="imgModalImg" src="" alt="미리보기">
+      <div class="img-modal-actions">
+        <button class="img-modal-confirm-btn" onclick="closeImgModal(event)">확인</button>
+        <button class="img-modal-delete-btn" id="imgModalDelete" onclick="deleteFromModal()">삭제</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ── 초기화 ──
+    document.addEventListener('DOMContentLoaded', () => {
+      updateSectorNumbers();
+      const year = new Date().getFullYear() - 1;
+      const el = document.getElementById('prevYearText');
+      if (el) el.textContent = year + "년도 실적보고서 첨부(PDF)";
+
+      document.getElementById('inspectionTarget').addEventListener('change', function () {
+        document.getElementById('inspectionFiles').style.display = this.value === 'Y' ? 'block' : 'none';
+      });
+    });
+
+    function updateSectorNumbers() {
+      const visibleSectors = document.querySelectorAll('.sector:not(.hidden)');
+      visibleSectors.forEach((s, i) => {
+        const num = s.querySelector('.sector-num');
+        if (num) num.textContent = i + 1;
+      });
+    }
+
+    // ── 업종 변경 핸들러 ──
+    function onBizTypeChange() {
+      const val = document.getElementById('bizType').value;
+      const isCollect = val === '수집운반';
+      const isDisposal = val.includes('처분');
+      const isRecycle = val.includes('재활용');
+      const showExtra = !isCollect && val !== '';
+
+      document.getElementById('sector2_facility').style.display = isCollect ? 'none' : '';
+      document.getElementById('storageTitle').textContent = isCollect ? '임시 보관시설 (보유 시)' : '보관시설 (허용보관량)';
+
+      document.getElementById('sector4').classList.toggle('hidden', !showExtra);
+      document.getElementById('sector5').classList.toggle('hidden', !showExtra);
+      document.getElementById('sector7').classList.toggle('hidden', !showExtra);
+      document.getElementById('sector8').classList.toggle('hidden', !showExtra);
+
+      const massBalance = document.getElementById('massBalanceSection');
+      if (massBalance) massBalance.classList.toggle('hidden', !isRecycle);
+
+      if (showExtra) {
+        const label = isDisposal ? '처분' : '재활용';
+        document.getElementById('sector4Title').textContent = label + '시설 설치명세서 및 도면';
+        document.getElementById('sector4Badge').textContent = isDisposal ? '처분업' : '재활용업';
+        document.getElementById('sector4Tag').textContent = label + '시설';
+        document.getElementById('sector5Title').textContent = label + '대상 폐기물의 ' + label + '공정도';
+        document.getElementById('sector5Badge').textContent = isDisposal ? '처분업' : '재활용업';
+        document.getElementById('sector5Desc').textContent = label + '대상 폐기물의 ' + label + '공정도를 첨부해 주세요.';
+        document.getElementById('sector7Badge').textContent = isDisposal ? '처분업' : '재활용업';
+        document.getElementById('sector8Badge').textContent = isDisposal ? '처분업' : '재활용업';
+
+        const s7notice = document.getElementById('sector7Notice');
+        if (isDisposal) {
+          s7notice.innerHTML = '적합성확인 직전년도 기준입니다.<br>● 연간반입량 및 연간처리량 : 올바로 실적보고의 내용을 적습니다.<br>● 조업일수 : 올바로시스템 → 대장관리 → 처리자 → 폐기물중간/최종/종합처분대장에서 출력합니다. 1년치를 다운로드 받아 분석기를 이용해보세요';
+        } else {
+          s7notice.innerHTML = '적합성확인 직전년도 기준입니다.<br>● 연간반입량 및 연간처리량 : 올바로 실적보고의 내용을 적습니다.<br>● 조업일수 : 올바로시스템 → 대장관리 → 처리자 → 폐기물수탁재활용관리대장에서 출력합니다. 1년치를 다운로드 받아 분석기를 이용해보세요';
+        }
+        syncSector4();
+      }
+      updateSectorNumbers();
+    }
+
+    // ── 섹터2 → 섹터4 동기화 (시설장비명, 규격(용량), 수량) ──
+    function syncSector4() {
+      const rows2 = document.querySelectorAll('#tbody2 tr');
+      const tbody4 = document.getElementById('tbody4');
+      tbody4.innerHTML = '';
+      rows2.forEach((row, i) => {
+        const nameInput = row.querySelector('input[data-col="name"]');
+        const specInput = row.querySelector('input[data-col="spec"]');
+        const qtyInput = row.querySelector('input[data-col="qty"]');
+        const name = nameInput ? nameInput.value : '';
+        const spec = specInput ? specInput.value : '';
+        const qty = qtyInput ? qtyInput.value : '';
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+      <td class="row-num">${i + 1}</td>
+      <td><input type="text" value="${escHtml(name)}" placeholder="시설장비명" style="background:#f5f3ef;font-weight:500;" readonly></td>
+      <td><input type="text" value="${escHtml(spec)}" placeholder="규격(용량)" style="background:#f5f3ef;" readonly></td>
+      <td><input type="text" value="${escHtml(qty)}" placeholder="수량" style="background:#f5f3ef;" readonly></td>
+      <td><input type="text" placeholder="사이즈"></td>
+      <td><input type="text" placeholder=""></td>
+      <td><input type="text" placeholder=""></td>
+      <td><input type="text" placeholder=""></td>
+      <td><input type="text" placeholder=""></td>
+      <td>
+        <div class="mini-photo mini-photo-sm">
+          <span class="placeholder">도면</span>
+          <input type="file" accept=".jpg,.jpeg,.png" onchange="miniPhotoSelect(event, this)">
+        </div>
+      </td>
+      <td class="del-cell"><button class="del-btn" onclick="delRow(this,'tbody4')" title="삭제">×</button></td>
+    `;
+        tbody4.appendChild(tr);
+      });
+      if (rows2.length === 0) addRow4();
+    }
+
+    function escHtml(str) {
+      return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function renum(tbodyId) {
+      document.querySelectorAll('#' + tbodyId + ' tr').forEach((r, i) => {
+        const c = r.querySelector('.row-num');
+        if (c) c.textContent = i + 1;
+      });
+    }
+
+    function delRow(btn, tbodyId) {
+      const tbody = document.getElementById(tbodyId);
+      if (tbody.rows.length <= 1) return;
+      btn.closest('tr').remove();
+      renum(tbodyId);
+    }
+
+    function calcDaily(el) {
+      const row = el.closest('tr');
+      const hourly = parseFloat(row.querySelector('[data-col="hourly"]').value);
+      const hours = parseFloat(row.querySelector('[data-col="hours"]').value);
+      const dailyInput = row.querySelector('[data-col="daily"]');
+      if (!isNaN(hourly) && !isNaN(hours)) dailyInput.value = Math.round(hourly * hours * 1000) / 1000;
+    }
+
+    function calcStorage(el) {
+      const row = el.closest('tr');
+      const w = parseFloat(row.querySelector('[data-sc="w"]').value);
+      const d = parseFloat(row.querySelector('[data-sc="d"]').value);
+      const h = parseFloat(row.querySelector('[data-sc="h"]').value);
+      const g = parseFloat(row.querySelector('[data-sc="g"]').value);
+      const volInput = row.querySelector('[data-sc="vol"]');
+      const resultInput = row.querySelector('[data-sc="result"]');
+      if (!isNaN(w) && !isNaN(d) && !isNaN(h)) {
+        const vol = Math.round(w * d * h * 100) / 100;
+        volInput.value = vol;
+        if (!isNaN(g)) resultInput.value = Math.round(vol * g * 100) / 100;
+      }
+    }
+
+    function calcStorageFromVol(el) {
+      const row = el.closest('tr');
+      const vol = parseFloat(row.querySelector('[data-sc="vol"]').value);
+      const g = parseFloat(row.querySelector('[data-sc="g"]').value);
+      const resultInput = row.querySelector('[data-sc="result"]');
+      if (!isNaN(vol) && !isNaN(g)) resultInput.value = Math.round(vol * g * 100) / 100;
+    }
+
+    // ── 행 추가 ──
+    function addRow2() {
+      const tbody = document.getElementById('tbody2');
+      const n = tbody.rows.length + 1;
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td class="row-num">${n}</td><td><input type="text" data-col="name" placeholder="시설·장비명"></td><td><input type="text" data-col="spec" placeholder="규격(용량)"></td><td><input type="text" data-col="qty" placeholder="수량"></td><td><input type="text" data-col="hourly" placeholder="톤/시간" oninput="calcDaily(this)"></td><td><input type="text" data-col="hours" placeholder="시간" oninput="calcDaily(this)"></td><td><input type="text" data-col="daily" placeholder="톤/일"></td><td class="del-cell"><button class="del-btn" onclick="delRow(this,'tbody2')" title="삭제">×</button></td>`;
+      tbody.appendChild(tr);
+    }
+    function addRowEtc() {
+      const tbody = document.getElementById('tbodyEtc');
+      const n = tbody.rows.length + 1;
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td class="row-num">${n}</td><td><input type="text" placeholder="시설종류"></td><td><input type="text" placeholder="규격/처리능력"></td><td><input type="text" placeholder="수량"></td><td class="del-cell"><button class="del-btn" onclick="delRow(this,'tbodyEtc')" title="삭제">×</button></td>`;
+      tbody.appendChild(tr);
+    }
+    function addRowStorage() {
+      const tbody = document.getElementById('tbodyStorage');
+      const n = tbody.rows.length + 1;
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td class="row-num">${n}</td><td><input type="text" placeholder="폐기물 종류"></td><td><input type="text" data-sc="w" placeholder="m" oninput="calcStorage(this)"></td><td><input type="text" data-sc="d" placeholder="m" oninput="calcStorage(this)"></td><td><input type="text" data-sc="h" placeholder="m" oninput="calcStorage(this)"></td><td><input type="text" data-sc="vol" placeholder="㎥" oninput="calcStorageFromVol(this)"></td><td><input type="text" data-sc="g" placeholder="톤/㎥" oninput="calcStorage(this)"></td><td><input type="text" data-sc="result" placeholder="톤"></td><td><div class="mini-photo mini-photo-sm"><span class="placeholder">외부전경</span><input type="file" accept=".jpg,.jpeg,.png" onchange="miniPhotoSelect(event, this)"></div></td><td><div class="mini-photo mini-photo-sm"><span class="placeholder">내부사진</span><input type="file" accept=".jpg,.jpeg,.png" onchange="miniPhotoSelect(event, this)"></div></td><td class="del-cell"><button class="del-btn" onclick="delRow(this,'tbodyStorage')" title="삭제">×</button></td>`;
+      tbody.appendChild(tr);
+    }
+    function addRow2_1() {
+      const tbody = document.getElementById('tbody2_1');
+      const n = tbody.rows.length + 1;
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td class="row-num">${n}</td><td><input type="text" placeholder="예: 포터, 탱크로리"></td><td><input type="text" placeholder="차량번호"></td><td><input type="text" placeholder="톤"></td><td><div class="mini-photo mini-photo-sm"><span class="placeholder">등록증</span><input type="file" accept=".jpg,.jpeg,.png,.pdf" onchange="miniPhotoSelect(event, this)"></div></td><td><div class="mini-photo mini-photo-sm"><span class="placeholder">사진</span><input type="file" accept=".jpg,.jpeg,.png" onchange="miniPhotoSelect(event, this)"></div></td><td class="del-cell"><button class="del-btn" onclick="delRow(this,'tbody2_1')" title="삭제">×</button></td>`;
+      tbody.appendChild(tr);
+    }
+    function addRow4() {
+      const tbody = document.getElementById('tbody4');
+      const n = tbody.rows.length + 1;
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td class="row-num">${n}</td><td><input type="text" placeholder="시설장비명"></td><td><input type="text" placeholder="규격(용량)"></td><td><input type="text" placeholder="수량"></td><td><input type="text" placeholder="사이즈"></td><td><input type="text" placeholder=""></td><td><input type="text" placeholder=""></td><td><input type="text" placeholder=""></td><td><input type="text" placeholder=""></td><td><div class="mini-photo mini-photo-sm"><span class="placeholder">도면</span><input type="file" accept=".jpg,.jpeg,.png" onchange="miniPhotoSelect(event, this)"></div></td><td class="del-cell"><button class="del-btn" onclick="delRow(this,'tbody4')" title="삭제">×</button></td>`;
+      tbody.appendChild(tr);
+    }
+    function addRow7() {
+      const tbody = document.getElementById('tbody7');
+      const n = tbody.rows.length + 1;
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td class="row-num">${n}</td><td><input type="text" placeholder="폐기물 종류"></td><td><input type="text" placeholder="톤"></td><td><input type="text" placeholder="톤"></td><td><input type="text" placeholder="일"></td><td class="del-cell"><button class="del-btn" onclick="delRow(this,'tbody7')" title="삭제">×</button></td>`;
+      tbody.appendChild(tr);
+    }
+
+    // ── 사진 업로드 ──
+    function handleFileSelect(e, containerId) { const f = e.target.files[0]; if (f) showImage(f, containerId); }
+    function dragOver(e, el) { e.preventDefault(); el.classList.add('dragover'); }
+    function dragLeave(el) { el.classList.remove('dragover'); }
+    function dropFile(e, el) { e.preventDefault(); el.classList.remove('dragover'); const f = e.dataTransfer.files[0]; if (f && f.type.startsWith('image/')) showImage(f, el.id); }
+    function showImage(file, containerId) {
+      const reader = new FileReader();
+      reader.onload = function (ev) {
+        const c = document.getElementById(containerId);
+        c.classList.add('has-image');
+        c.innerHTML = `<img src="${ev.target.result}" alt="첨부 이미지"><button class="remove-img" onclick="resetPhoto('${containerId}')" title="제거">×</button>`;
+      };
+      reader.readAsDataURL(file);
+    }
+    function resetPhoto(containerId) {
+      const c = document.getElementById(containerId);
+      c.classList.remove('has-image');
+      c.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><p>이미지를 드래그하여 놓거나 <span>파일 선택</span> (jpg, png)</p><input type="file" accept=".jpg,.jpeg,.png" onchange="handleFileSelect(event, '${containerId}')">`;
+      c.ondragover = function (e) { dragOver(e, this); };
+      c.ondragleave = function () { dragLeave(this); };
+      c.ondrop = function (e) { dropFile(e, this); };
+    }
+
+    function miniPhotoSelect(e, input) {
+      const file = e.target.files[0]; if (!file) return;
+      const reader = new FileReader();
+      const photoDiv = input.closest('.mini-photo');
+      reader.onload = function (ev) {
+        const ph = photoDiv.querySelector('.placeholder'); if (ph) ph.remove();
+        input.style.pointerEvents = 'none';
+        let img = photoDiv.querySelector('img');
+        if (!img) { img = document.createElement('img'); img.style.cursor = 'pointer'; photoDiv.insertBefore(img, input); }
+        img.src = ev.target.result;
+        img.onclick = function (ce) { ce.preventDefault(); ce.stopPropagation(); openImgModal(this.src, photoDiv, input); };
+        photoDiv.onclick = function (ce) { if (img && img.src) { ce.preventDefault(); ce.stopPropagation(); openImgModal(img.src, photoDiv, input); } };
+      };
+      reader.readAsDataURL(file);
+    }
+
+    let currentModalPhotoDiv = null, currentModalFileInput = null;
+    function openImgModal(src, pd, fi) {
+      currentModalPhotoDiv = pd || null; currentModalFileInput = fi || null;
+      document.getElementById('imgModalImg').src = src;
+      document.getElementById('imgModalDelete').style.display = pd ? 'inline-flex' : 'none';
+      document.getElementById('imgModal').classList.add('active');
+    }
+    function closeImgModal(e) {
+      if (e && e.target !== document.getElementById('imgModal') && !e.target.closest('.img-modal-confirm-btn')) return;
+      document.getElementById('imgModal').classList.remove('active');
+      currentModalPhotoDiv = null; currentModalFileInput = null;
+    }
+    function deleteFromModal() {
+      if (currentModalPhotoDiv) {
+        const img = currentModalPhotoDiv.querySelector('img'); if (img) img.remove();
+        const inp = currentModalPhotoDiv.querySelector('input[type="file"]'); if (inp) { inp.value = ''; inp.style.pointerEvents = ''; }
+        let ph = currentModalPhotoDiv.querySelector('.placeholder');
+        if (!ph) { ph = document.createElement('span'); ph.className = 'placeholder'; ph.textContent = 'jpg, png'; currentModalPhotoDiv.insertBefore(ph, currentModalPhotoDiv.querySelector('input[type="file"]')); }
+        currentModalPhotoDiv.onclick = null;
+      }
+      document.getElementById('imgModal').classList.remove('active');
+      currentModalPhotoDiv = null; currentModalFileInput = null;
+    }
+
+    document.getElementById('tbody2').addEventListener('input', function () {
+      const val = document.getElementById('bizType').value;
+      if (val && val !== '수집운반') syncSector4();
+    });
+
+    // ── 아코디언 패널 토글 ──
+    function togglePanel(panelId, btnId) {
+      const panel = document.getElementById(panelId);
+      const isOpen = panel.style.maxHeight !== '0px' && panel.style.maxHeight !== '';
+
+      // 화살표 아이콘 ID 추론 (btn접두어 → arrow접두어)
+      const arrowId = 'arrow' + btnId.replace('btn', '');
+      const arrow = document.getElementById(arrowId);
+
+      if (isOpen) {
+        // 닫기
+        panel.style.maxHeight = '0px';
+        panel.style.opacity = '0';
+        panel.style.marginTop = '0';
+        if (arrow) arrow.style.transform = 'rotate(0deg)';
+      } else {
+        // 열기: iframe lazy-load
+        const iframe = panel.querySelector('iframe[data-src]');
+        if (iframe && !iframe.src) {
+          iframe.src = iframe.getAttribute('data-src');
+        }
+        panel.style.maxHeight = '900px';
+        panel.style.opacity = '1';
+        panel.style.marginTop = '8px';
+        if (arrow) arrow.style.transform = 'rotate(180deg)';
+
+        // 열린 직후 패널 위치로 부드럽게 스크롤
+        setTimeout(() => {
+          panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 120);
+      }
+    }
+  </script>
+
+</body>
+
+</html>
